@@ -1,0 +1,36 @@
+/* chatbot.css */
+#chatbox {
+    width: 300px;
+    height: 400px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+#messages {
+    height: 300px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+
+#message-input {
+    width: calc(100% - 80px);
+    padding: 5px;
+    margin-right: 10px; /* Adicione margem para separar do botão */
+}
+
+#send-button {
+    width: 70px;
+    padding: 5px;
+    display: inline-block; /* Certifique-se de que o botão é exibido corretamente */
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.message strong {
+    display: block;
+}
