@@ -14,7 +14,7 @@ class ChatbotController extends Controller
     public function handle(Request $request)
     {
         $message = $request->input('message');
-        $conversationState = $request->session()->get('conversationState', 'start');
+        $conversationState = $request->session()->get('conversationState', 'main_menu');
 
         $response = $this->processMessage($message, $conversationState);
 
@@ -27,17 +27,11 @@ class ChatbotController extends Controller
     private function processMessage($message, $conversationState)
     {
         switch ($conversationState) {
-            case 'start':
-                return [
-                    'message' => '1. Início com informações padrões automáticas<br>2. Perguntas pré-definidas para funcionários de empresas cadastradas<br>3. Falar com atendente (consultor do RH Resolve +)<br>4. Agendamento de horário presencial com o RH da empresa',
-                    'state' => 'main_menu'
-                ];
-
             case 'main_menu':
                 if ($message == '1') {
                     return [
                         'message' => 'Aqui estão as informações automáticas padrão...',
-                        'state' => 'start'
+                        'state' => 'main_menu'
                     ];
                 } elseif ($message == '2') {
                     return [
@@ -89,8 +83,6 @@ class ChatbotController extends Controller
                             'state' => 'pre_defined_questions'
                         ];
                 }
-
-            // Adicione outros casos para cada estado necessário
 
             default:
                 return [
