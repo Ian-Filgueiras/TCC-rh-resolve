@@ -2,10 +2,12 @@ html,
 body {
     height: 100%;
     margin: 0;
-    background: linear-gradient(45deg, #500E94, #222FA1);
+    background: linear-gradient(3deg, #A89AF9, #D7C3F4);
     background-size: 400% 400%;
     animation: gradientAnimation 4s ease infinite;
 }
+
+/*=======================CHATBOT===========================*/
 
 .input {
     width: 100%;
@@ -183,6 +185,7 @@ body {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(100%);
     }
@@ -202,9 +205,11 @@ body {
     0% {
         background-position: 0% 0%;
     }
+
     50% {
         background-position: 100% 100%;
     }
+
     100% {
         background-position: 0% 0%;
     }
@@ -219,9 +224,11 @@ body {
     0% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(100%);
     }
+
     100% {
         transform: translateX(0);
     }
@@ -245,6 +252,93 @@ body {
     }
 }
 
+/*=======================WELCOME=======================*/
+
+/* <uniquifier>: Use a unique and descriptive class name
+   <weight>: Use a value from 100 to 900 */
+
+.roboto-thin {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    color: rgb(54, 8, 179);
+}
+
+.roboto-black {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 75px;
+    color: rgb(0, 0, 0);
+    line-height: 1
+}
+
+.footer {
+    background-color: #f5f5f5;
+    padding: 20px 20px !important;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+#logo {
+    transform: translateY(12px);
+    margin-left: 20px;
+    color: white;
+}
+
+.navbar-start {
+    margin-left: 20px;
+}
+
+.navbar {
+    background-color: #6935A4 !important;
+}
+
+.navbar .navbar-item {
+    color: white;
+}
+
+.navbar .navbar-item:hover {
+background-color: #5b18a78a;
+color: white;
+}
+
+.navbar-dropdown .navbar-item {
+    color: black;
+}
+
+#pfp {
+    background: none;
+    border: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*=======================MEDIA QUERIES=======================*/
+
 @media screen and (max-width: 412px) and (max-height: 914px) {
     #chatbox {
         padding: 10px;
@@ -262,6 +356,7 @@ body {
         margin: 0;
         flex: 1;
         overflow-y: auto;
+        min-height: 800px;
     }
 
     .message {
@@ -305,6 +400,7 @@ body {
         margin: 0;
         flex: 1;
         overflow-y: auto;
+        min-height: 800px;
     }
 
     .message {
@@ -418,4 +514,3 @@ body {
         margin-top: auto;
     }
 }
-
