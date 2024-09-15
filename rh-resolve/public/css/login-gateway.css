@@ -1,0 +1,430 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    height: 100vh;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    margin: 0;
+    box-shadow: 2px 18px 70px 0px #9D9D9D;
+    overflow: hidden;
+}
+
+.login-text {
+    width: 100vw;
+    height: 75vh;
+    background: linear-gradient(3deg, #A89AF9, #D7C3F4);
+    background-size: 200% 100%;
+    position: absolute;
+    top: -50vh;
+    box-sizing: border-box;
+    padding: 6%;
+    transition: all 0.5s ease-in-out;
+    z-index: 11;
+    animation: gradientMove 10s linear infinite;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.login-text.expand .text {
+    opacity: 1;
+    visibility: visible;
+}
+
+.text a, .text a:visited {
+    font-size: 36px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.text hr {
+    width: 50%;
+    border: 0;
+    border-top: 2px solid #fff;
+    margin: 10px auto;
+}
+
+.text input {
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    padding: 1em;
+    background-color: #f3f3f3;
+    box-shadow: inset 1px 3px 6px rgba(0,0,0,0.1);
+    transition: 300ms ease-in-out;
+    color: black;
+}
+
+.text input:focus {
+    background-color: white;
+    transform: scale(1.05);
+    box-shadow: 13px 13px 100px #969696,
+               -13px -13px 100px #ffffff;
+               color: black;
+}
+
+.text button {
+    margin-top: 30px;
+    height: 40px;
+    width: 100%;
+    max-width: 140px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+    background: #fff;
+    color: black;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.text button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+
+.cta {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(55, 7, 97, 1) 0%, rgba(20, 23, 110, 1) 100%);
+    background-size: 200% 100%;
+    border: 2px solid #fff;
+    position: absolute;
+    bottom: -30px;
+    left: calc(50% - 30px);
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    z-index: 11;
+    animation: gradientMove 5s linear infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+
+.call-text {
+    background-color: #fff;
+    width: 100vw;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    padding: 10%;
+    box-sizing: border-box;
+    text-align: center;
+
+    h1 {
+        font-size: 42px;
+        margin-top: 10%;
+        color: #696a86;
+
+        span {
+            color: #333;
+            font-weight: bolder;
+        }
+    }
+
+    button {
+        height: 40px;
+        width: 180px;
+        border: none;
+        border-radius: 20px;
+        background: linear-gradient(90deg, rgba(55, 7, 97, 1) 0%, rgba(20, 23, 110, 1) 100%);
+        background-size: 300% 150%;
+        color: #fff;
+        font-weight: bolder;
+        margin-top: 30px;
+        cursor: pointer;
+        outline: none;
+        transition: transform 0.3s ease-in-out;
+        animation: gradientMove 4s linear infinite;
+    }
+
+    @keyframes gradientMove {
+        0% {
+            background-position: 0% 0%;
+        }
+        50% {
+            background-position: 100% 0%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+}
+
+.show-hide {
+    display: block;
+    position: relative;
+    top: -75px;
+    transition: all 0.5s ease-in-out;
+}
+
+.expand {
+    top: 0;
+    height: 50vh;
+}
+
+.form-control {
+    margin-top: 20px;
+    height: 40px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    background-color: #444;
+    color: #fff;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/*===========================MEDIA QUERIES===============================*/
+
+@media (max-width: 600px) {
+    body {
+        font-size: 12px; /* Ajusta o tamanho da fonte para dispositivos pequenos */
+    }
+
+    .wrapper {
+        box-shadow: 1px 6px 30px 0px #9D9D9D; /* Reduza a sombra para tamanhos menores */
+    }
+
+    .login-text {
+        height: 50vh; /* Reduz a altura do gradiente */
+        top: -30vh; /* Ajusta a posição */
+        padding: 3%; /* Reduz o padding */
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+    }
+
+    .text a, .text a:visited {
+        font-size: 24px; /* Reduz o tamanho da fonte para links */
+    }
+
+    .text hr {
+        width: 30%; /* Ajusta a largura da linha horizontal */
+    }
+
+    .text input {
+        padding: 0.6em; /* Reduz o padding do input */
+    }
+
+    .text button {
+        height: 30px; /* Ajusta a altura do botão */
+        max-width: 100px; /* Ajusta a largura máxima do botão */
+    }
+
+    .cta {
+        width: 40px; /* Ajusta o tamanho do CTA */
+        height: 40px;
+        bottom: -10px; /* Ajusta a posição do CTA */
+    }
+
+    .call-text {
+        height: 50vh; /* Reduz a altura da área de chamada */
+        padding: 4%; /* Ajusta o padding */
+    }
+
+    .call-text h1 {
+        font-size: 28px; /* Reduz o tamanho da fonte do título */
+    }
+
+    .call-text button {
+        height: 30px; /* Ajusta a altura do botão */
+        width: 120px; /* Ajusta a largura do botão */
+    }
+
+    .form-control {
+        height: 30px; /* Ajusta a altura dos campos de formulário */
+        max-width: 250px; /* Ajusta a largura máxima dos campos de formulário */
+    }
+
+    .show-hide {
+        transform: translateY(250px); /* Ajusta a posição vertical */
+    }
+
+    .expand {
+        height: 75vh; /* Ajusta a altura da expansão */
+    }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+    body {
+        font-size: 16px; /* Ajusta o tamanho da fonte para dispositivos médios */
+    }
+
+    .wrapper {
+        box-shadow: 1px 8px 50px 0px #9D9D9D; /* Ajusta a sombra */
+    }
+
+    .login-text {
+        height: 65vh; /* Ajusta a altura do gradiente */
+        top: -45vh; /* Ajusta a posição */
+        padding: 5%; /* Ajusta o padding */
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+    }
+
+    .text a, .text a:visited {
+        font-size: 30px; /* Ajusta o tamanho da fonte para links */
+    }
+
+    .text hr {
+        width: 35%; /* Ajusta a largura da linha horizontal */
+    }
+
+    .text input {
+        padding: 0.9em; /* Ajusta o padding do input */
+    }
+
+    .text button {
+        height: 40px; /* Ajusta a altura do botão */
+        max-width: 130px; /* Ajusta a largura máxima do botão */
+    }
+
+    .cta {
+        width: 45px; /* Ajusta o tamanho do CTA */
+        height: 45px;
+        bottom: -15px; /* Ajusta a posição do CTA */
+    }
+
+    .call-text {
+        height: 65vh; /* Ajusta a altura da área de chamada */
+        padding: 6%; /* Ajusta o padding */
+    }
+
+    .call-text h1 {
+        font-size: 36px; /* Ajusta o tamanho da fonte do título */
+    }
+
+    .call-text button {
+        height: 35px; /* Ajusta a altura do botão */
+        width: 140px; /* Ajusta a largura do botão */
+    }
+
+    .form-control {
+        height: 35px; /* Ajusta a altura dos campos de formulário */
+        max-width: 270px; /* Ajusta a largura máxima dos campos de formulário */
+    }
+
+    .show-hide {
+        transform: translateY(300px); /* Ajusta a posição vertical */
+    }
+
+    .expand {
+        height: 90vh; /* Ajusta a altura da expansão */
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+    body {
+        font-size: 18px; /* Ajusta o tamanho da fonte para dispositivos grandes */
+    }
+
+    .wrapper {
+        box-shadow: 2px 12px 60px 0px #9D9D9D; /* Ajusta a sombra */
+    }
+
+    .login-text {
+        height: 70vh; /* Ajusta a altura do gradiente */
+        top: -50vh; /* Ajusta a posição */
+        padding: 6%; /* Ajusta o padding */
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+    }
+
+    .text a, .text a:visited {
+        font-size: 32px; /* Ajusta o tamanho da fonte para links */
+    }
+
+    .text hr {
+        width: 45%; /* Ajusta a largura da linha horizontal */
+    }
+
+    .text input {
+        padding: 1em; /* Ajusta o padding do input */
+    }
+
+    .text button {
+        height: 45px; /* Ajusta a altura do botão */
+        max-width: 150px; /* Ajusta a largura máxima do botão */
+    }
+
+    .cta {
+        width: 55px; /* Ajusta o tamanho do CTA */
+        height: 55px;
+        bottom: -25px; /* Ajusta a posição do CTA */
+    }
+
+    .call-text {
+        height: 70vh; /* Ajusta a altura da área de chamada */
+        padding: 7%; /* Ajusta o padding */
+    }
+
+    .call-text h1 {
+        font-size: 38px; /* Ajusta o tamanho da fonte do título */
+    }
+
+    .call-text button {
+        height: 40px; /* Ajusta a altura do botão */
+        width: 160px; /* Ajusta a largura do botão */
+    }
+
+    .form-control {
+        height: 40px; /* Ajusta a altura dos campos de formulário */
+        max-width: 300px; /* Ajusta a largura máxima dos campos de formulário */
+    }
+
+    .show-hide {
+        transform: translateY(350px); /* Ajusta a posição vertical */
+    }
+
+    .expand {
+        height: 100vh; /* Ajusta a altura da expansão para dispositivos grandes */
+    }
+}
+
+
