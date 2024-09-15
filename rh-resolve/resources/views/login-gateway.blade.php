@@ -24,7 +24,9 @@
       <br>
       <input type="password" class="form-control" placeholder="Senha">
       <br>
-      <button class="btn btn-primary login-btn">Entrar</button>
+      <button class="btn btn-primary login-btn button">
+        <span class="button-content">Entrar</span>
+      </button>
     </div>
   </div>
   <div class="call-text">
