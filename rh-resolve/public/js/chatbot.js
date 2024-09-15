@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Exibe a mensagem inicial quando a página carregar
+    
     appendMessage('Bot', '1. Início com informações padrões automáticas<br>2. Perguntas pré-definidas para funcionários de empresas cadastradas<br>3. Falar com atendente (consultor do RH Resolve +)<br>4. Agendamento de horário presencial com o RH da empresa');
 
     // Adiciona o evento de clique ao botão de envio
