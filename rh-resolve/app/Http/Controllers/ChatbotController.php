@@ -41,10 +41,30 @@ class ChatbotController extends Controller
         switch ($conversationState) {
             case 'main_menu':
                 return $this->handleMainMenu($message);
-
+    
             case 'pre_defined_questions':
                 return $this->handlePreDefinedQuestions($message);
-
+    
+            case 'ask_if_solved': // Pergunta se a dúvida foi solucionada
+                if ($message == '1') {
+                    return $this->askForRating(); // Pergunta a avaliação de 1 a 10
+                } elseif ($message == '2') {
+                    return [
+                        'message' => 'Encaminhando você para falar com um atendente...',
+                        'state' => 'contacting_attendant'
+                    ];
+                } elseif ($message == '3') {
+                    return $this->showMainMenu(); // Volta ao menu principal
+                } else {
+                    return [
+                        'message' => 'Opção inválida. Por favor, selecione uma opção válida.',
+                        'state' => 'ask_if_solved'
+                    ];
+                }
+    
+            case 'ask_for_rating': // Recebe a avaliação de 1 a 10
+                return $this->endConversationWithRating($message); // Finaliza o atendimento com a avaliação
+    
             default:
                 return [
                     'message' => 'Desculpe, não entendi. Por favor, selecione uma opção válida.',
@@ -209,14 +229,34 @@ class ChatbotController extends Controller
     private function askIfSolved()
     {
         return [
-            'message' => 'Sua dúvida foi solucionada?<br>1. Sim<br>1. Não',
+            'message' => 'Sua dúvida foi solucionada?<br>1. Sim<br>2. Não<br>3. Voltar ao menu principal',
             'state' => 'ask_if_solved'
         ];
     }
 
+    private function askForRating()
+    {
+        return [
+            'message' => 'Por favor, avalie o atendimento de 1 a 10.',
+            'state' => 'ask_for_rating'
+        ];
+    }
 
+    private function endConversationWithRating($rating)
+    {
+        return [
+            'message' => 'Obrigado pela sua avaliação de ' . $rating . '/10. Atendimento finalizado.',
+            'state' => 'main_menu'
+        ];
+    }
 
-
+    private function showMainMenu()
+    {
+        return [
+            'message' => 'Selecione um tópico:<br>1. Início com informações padrões automáticas<br>2. Perguntas pré-definidas para funcionários de empresas cadastradas<br>3. Falar com atendente<br>4. Agendamento de horário presencial com o RH',
+            'state' => 'main_menu'
+        ];
+    }
 
     // Função para lidar com a escolha das perguntas de Holerite e Benefícios
     private function handleQuestionSelection($message, $selectedTopic)
@@ -253,23 +293,23 @@ class ChatbotController extends Controller
                 ];
             case '2':
                 return [
-                    'message' => 'Códigos/Siglas:<br>- SAL: Salário base.<br>- FGTS: Fundo de Garantia do Tempo de Serviço.<br>- INSS: Instituto Nacional do Seguro Social.<br>- VT: Vale Transporte.<br>- VA: Vale Alimentação.',
-                    'state' => 'main_menu'
+                    'message' => 'Códigos/Siglas:<br>- SAL: Salário base.<br>- FGTS: Fundo de Garantia do Tempo de Serviço.<br>- INSS: Instituto Nacional do Seguro Social.<br>- VT: Vale Transporte.<br>- VA: Vale Alimentação.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Para solicitar correção na folha de pagamento, entre em contato com um analista em tempo real ou agende um horário no RH.',
-                    'state' => 'main_menu'
+                    'message' => 'Para solicitar correção na folha de pagamento, entre em contato com um analista em tempo real ou agende um horário no RH.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Cálculo de contribuições:<br>- INSS: 9%<br>- FGTS: 8%<br>- Vale Transporte: 6%',
-                    'state' => 'main_menu'
+                    'message' => 'Cálculo de contribuições:<br>- INSS: 9%<br>- FGTS: 8%<br>- Vale Transporte: 6%<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Você pode verificar a conformidade da sua folha de pagamento com o seu contrato entrando em contato com um de nossos analistas.',
-                    'state' => 'main_menu'
+                    'message' => 'Você pode verificar a conformidade da sua folha de pagamento com o seu contrato entrando em contato com um de nossos analistas.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -286,28 +326,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'Benefícios incluídos no contrato:<br>- FGTS<br>- Vale Alimentação<br>- Vale Refeição<br>- Horas Extras<br>- Comissões e Bonificações<br>- Plano de Saúde: Cobertura de 70%',
-                    'state' => 'main_menu'
+                    'message' => 'Benefícios incluídos no contrato:<br>- FGTS<br>- Vale Alimentação<br>- Vale Refeição<br>- Horas Extras<br>- Comissões e Bonificações<br>- Plano de Saúde: Cobertura de 70%<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'Para acessar os benefícios, baixe o aplicativo Alelo para VA/VR e o aplicativo Hapvida para o plano de saúde.',
-                    'state' => 'main_menu'
+                    'message' => 'Para acessar os benefícios, baixe o aplicativo Alelo para VA/VR e o aplicativo Hapvida para o plano de saúde.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Benefícios adicionais para cargos específicos:<br>- Supervisores: Bônus sob os lucros da empresa.<br>- Gestores: Planos de aposentadoria.<br>- Administradores: Modalidade home office.',
-                    'state' => 'main_menu'
+                    'message' => 'Benefícios adicionais para cargos específicos:<br>- Supervisores: Bônus sob os lucros da empresa.<br>- Gestores: Planos de aposentadoria.<br>- Administradores: Modalidade home office.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Para incluir um dependente no plano de saúde, preencha o formulário e anexe a documentação comprovando o relacionamento.',
-                    'state' => 'main_menu'
+                    'message' => 'Para incluir um dependente no plano de saúde, preencha o formulário e anexe a documentação comprovando o relacionamento.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Benefícios sazonais incluem bônus de fim de ano e vouchers para compras em perfumarias e cosméticos.',
-                    'state' => 'main_menu'
+                    'message' => 'Benefícios sazonais incluem bônus de fim de ano e vouchers para compras em perfumarias e cosméticos.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -323,28 +363,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'Tipos de descontos:<br>- INSS<br>- FGTS<br>- Vale Transporte: 6%<br>- Vale Alimentação: 8%<br>- Plano de Saúde: R$ 30,00/mensal + coparticipação.',
-                    'state' => 'main_menu'
+                    'message' => 'Tipos de descontos:<br>- INSS<br>- FGTS<br>- Vale Transporte: 6%<br>- Vale Alimentação: 8%<br>- Plano de Saúde: R$ 30,00/mensal + coparticipação.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'Desconto do plano de saúde:<br>R$ 30,00/mensal + coparticipação de R$ 15,00 para consultas e exames.',
-                    'state' => 'main_menu'
+                    'message' => 'Desconto do plano de saúde:<br>R$ 30,00/mensal + coparticipação de R$ 15,00 para consultas e exames.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Para contestar um desconto incorreto, entre em contato com um analista em tempo real ou agende um horário no RH.',
-                    'state' => 'main_menu'
+                    'message' => 'Para contestar um desconto incorreto, entre em contato com um analista em tempo real ou agende um horário no RH.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Descontos para faltas não justificadas:<br>Jornada: 8 horas / 5 dias / 160h<br>Valor por hora: R$ 8,87<br>Valor por dia: R$ 71,00.',
-                    'state' => 'main_menu'
+                    'message' => 'Descontos para faltas não justificadas:<br>Jornada: 8 horas / 5 dias / 160h<br>Valor por hora: R$ 8,87<br>Valor por dia: R$ 71,00.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Descontos por danos ou perdas de equipamentos:<br>1° infração: Advertência<br>2° infração: Suspensão com desconto no salário<br>3° infração: Desligamento.',
-                    'state' => 'main_menu'
+                    'message' => 'Descontos por danos ou perdas de equipamentos:<br>1° infração: Advertência<br>2° infração: Suspensão com desconto no salário<br>3° infração: Desligamento.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -360,28 +400,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'O adicional ofertado pela empresa é de 50% sobre o valor da hora.',
-                    'state' => 'main_menu'
+                    'message' => 'O adicional ofertado pela empresa é de 50% sobre o valor da hora.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'Suas horas extras são registradas na folha de ponto, que pode ser consultada no portal do funcionário.',
-                    'state' => 'main_menu'
+                    'message' => 'Suas horas extras são registradas na folha de ponto, que pode ser consultada no portal do funcionário.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Sim, o limite máximo de horas extras é de 2 horas por dia.',
-                    'state' => 'main_menu'
+                    'message' => 'Sim, o limite máximo de horas extras é de 2 horas por dia.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Cálculo do valor da hora extra:<br>Seu salário: R$ 1.420,00<br>Valor por hora: R$ 8,87<br>Valor da hora extra: R$ 13,30.',
-                    'state' => 'main_menu'
+                    'message' => 'Cálculo do valor da hora extra:<br>Seu salário: R$ 1.420,00<br>Valor por hora: R$ 8,87<br>Valor da hora extra: R$ 13,30.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Cálculo de horas extras em feriados e finais de semana:<br>- Feriados: Adicional de 100% (R$ 142,00 por dia).<br>- Finais de semana: Adicional de 50% (R$ 106,50 por dia).',
-                    'state' => 'main_menu'
+                    'message' => 'Cálculo de horas extras em feriados e finais de semana:<br>- Feriados: Adicional de 100% (R$ 142,00 por dia).<br>- Finais de semana: Adicional de 50% (R$ 106,50 por dia).<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -397,28 +437,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'O valor das suas férias é calculado com um adicional de um terço sobre o salário.<br>- Salário: R$ 1.420,00<br>- Adicional de 1/3: R$ 473,33<br>- Total das férias: R$ 1.893,33.',
-                    'state' => 'main_menu'
+                    'message' => 'O valor das suas férias é calculado com um adicional de um terço sobre o salário.<br>- Salário: R$ 1.420,00<br>- Adicional de 1/3: R$ 473,33<br>- Total das férias: R$ 1.893,33.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'O prazo para solicitar suas férias é após 12 meses de trabalho. Você tem 6 meses acumulados até agora.',
-                    'state' => 'main_menu'
+                    'message' => 'O prazo para solicitar suas férias é após 12 meses de trabalho. Você tem 6 meses acumulados até agora.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Sim, você pode dividir suas férias em até 3 períodos:<br>- 1º período: 14 dias<br>- 2º período: 10 dias<br>- 3º período: 6 dias.',
-                    'state' => 'main_menu'
+                    'message' => 'Sim, você pode dividir suas férias em até 3 períodos:<br>- 1º período: 14 dias<br>- 2º período: 10 dias<br>- 3º período: 6 dias.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Você pode vender até 10 dias das suas férias. Para isso, formalize o pedido por escrito e anexe a documentação.',
-                    'state' => 'main_menu'
+                    'message' => 'Você pode vender até 10 dias das suas férias. Para isso, formalize o pedido por escrito e anexe a documentação.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Se você tiver férias vencidas, o valor a receber é o correspondente ao salário + 1/3 adicional.<br>- Salário: R$ 1.420,00<br>- Adicional de 1/3: R$ 473,33<br>- Total: R$ 1.893,33.',
-                    'state' => 'main_menu'
+                    'message' => 'Se você tiver férias vencidas, o valor a receber é o correspondente ao salário + 1/3 adicional.<br>- Salário: R$ 1.420,00<br>- Adicional de 1/3: R$ 473,33<br>- Total: R$ 1.893,33.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -434,28 +474,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'O prazo para entregar o atestado médico é de até 48 horas após o início da ausência.',
-                    'state' => 'main_menu'
+                    'message' => 'O prazo para entregar o atestado médico é de até 48 horas após o início da ausência.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'Se você não fornecer o atestado médico no prazo, sua ausência será considerada falta injustificada, o que poderá levar a descontos no salário.',
-                    'state' => 'main_menu'
+                    'message' => 'Se você não fornecer o atestado médico no prazo, sua ausência será considerada falta injustificada, o que poderá levar a descontos no salário.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Se o atestado especifica restrição de atividades, envie o atestado ao RH especificando as restrições.',
-                    'state' => 'main_menu'
+                    'message' => 'Se o atestado especifica restrição de atividades, envie o atestado ao RH especificando as restrições.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Você pode enviar seu atestado médico pelo portal de anexar documentos ou diretamente ao setor de RH.',
-                    'state' => 'main_menu'
+                    'message' => 'Você pode enviar seu atestado médico pelo portal de anexar documentos ou diretamente ao setor de RH.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Atestados médicos podem afetar seus benefícios, com coparticipação no plano de saúde e descontos proporcionais no vale refeição e alimentação.',
-                    'state' => 'main_menu'
+                    'message' => 'Atestados médicos podem afetar seus benefícios, com coparticipação no plano de saúde e descontos proporcionais no vale refeição e alimentação.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -471,28 +511,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'Direitos da empresa em relação à má conduta dos funcionários:<br>- Advertências<br>- Suspensões<br>- Demissões',
-                    'state' => 'main_menu'
+                    'message' => 'Direitos da empresa em relação à má conduta dos funcionários:<br>- Advertências<br>- Suspensões<br>- Demissões<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'Deveres da empresa em relação às condições de trabalho:<br>- Segurança e saúde no ambiente de trabalho<br>- Remuneração justa<br>- Férias de 30 dias<br>- Benefícios obrigatórios.',
-                    'state' => 'main_menu'
+                    'message' => 'Deveres da empresa em relação às condições de trabalho:<br>- Segurança e saúde no ambiente de trabalho<br>- Remuneração justa<br>- Férias de 30 dias<br>- Benefícios obrigatórios.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'A empresa comunica mudanças nas políticas por meio de:<br>- Mural de informações no chatbot<br>- E-mails<br>- Reuniões de equipe<br>- Treinamentos.',
-                    'state' => 'main_menu'
+                    'message' => 'A empresa comunica mudanças nas políticas por meio de:<br>- Mural de informações no chatbot<br>- E-mails<br>- Reuniões de equipe<br>- Treinamentos.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Para registrar reclamações ou sugestões, entre em contato com um analista em tempo real ou agende um horário no RH.',
-                    'state' => 'main_menu'
+                    'message' => 'Para registrar reclamações ou sugestões, entre em contato com um analista em tempo real ou agende um horário no RH.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Responsabilidades da empresa em relação às leis trabalhistas:<br>- Garantir conformidade com a CLT<br>- Registro correto das horas trabalhadas<br>- Ambiente seguro e saudável.',
-                    'state' => 'main_menu'
+                    'message' => 'Responsabilidades da empresa em relação às leis trabalhistas:<br>- Garantir conformidade com a CLT<br>- Registro correto das horas trabalhadas<br>- Ambiente seguro e saudável.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -508,28 +548,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'Direitos básicos garantidos para os funcionários:<br>- Remuneração justa<br>- Ambiente seguro e confortável<br>- Igualdade e respeito à privacidade.',
-                    'state' => 'main_menu'
+                    'message' => 'Direitos básicos garantidos para os funcionários:<br>- Remuneração justa<br>- Ambiente seguro e confortável<br>- Igualdade e respeito à privacidade.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'Principais responsabilidades no ambiente de trabalho:<br>- Desempenhar suas tarefas<br>- Cumprir as políticas da empresa<br>- Pontualidade e assiduidade<br>- Uso adequado dos recursos da empresa.',
-                    'state' => 'main_menu'
+                    'message' => 'Principais responsabilidades no ambiente de trabalho:<br>- Desempenhar suas tarefas<br>- Cumprir as políticas da empresa<br>- Pontualidade e assiduidade<br>- Uso adequado dos recursos da empresa.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Se seus direitos estão sendo violados, registre os detalhes e entre em contato com um analista em tempo real ou agende um horário no RH.',
-                    'state' => 'main_menu'
+                    'message' => 'Se seus direitos estão sendo violados, registre os detalhes e entre em contato com um analista em tempo real ou agende um horário no RH.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Consequências de não cumprir suas responsabilidades:<br>- Advertências e repreensões<br>- Suspensão<br>- Rebaixamento de função<br>- Demissão.',
-                    'state' => 'main_menu'
+                    'message' => 'Consequências de não cumprir suas responsabilidades:<br>- Advertências e repreensões<br>- Suspensão<br>- Rebaixamento de função<br>- Demissão.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Obrigações em relação à confidencialidade de informações:<br>- Não divulgar informações confidenciais<br>- Proteger informações sensíveis como senhas e documentos<br>- Reportar violações de segurança imediatamente.',
-                    'state' => 'main_menu'
+                    'message' => 'Obrigações em relação à confidencialidade de informações:<br>- Não divulgar informações confidenciais<br>- Proteger informações sensíveis como senhas e documentos<br>- Reportar violações de segurança imediatamente.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
@@ -545,28 +585,28 @@ class ChatbotController extends Controller
         switch ($message) {
             case '1':
                 return [
-                    'message' => 'Para relatar uma violação do código de ética de forma confidencial, registre os detalhes e entre em contato com um analista em tempo real ou agende um horário no RH.',
-                    'state' => 'main_menu'
+                    'message' => 'Para relatar uma violação do código de ética de forma confidencial, registre os detalhes e entre em contato com um analista em tempo real ou agende um horário no RH.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '2':
                 return [
-                    'message' => 'A empresa considera como comportamento inadequado:<br>- Fraude<br>- Desonestidade<br>- Assédio moral ou sexual<br>- Discriminação racial, de gênero, religiosa, etc.',
-                    'state' => 'main_menu'
+                    'message' => 'A empresa considera como comportamento inadequado:<br>- Fraude<br>- Desonestidade<br>- Assédio moral ou sexual<br>- Discriminação racial, de gênero, religiosa, etc.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '3':
                 return [
-                    'message' => 'Consequências para quem violar o código:<br>- Advertência verbal e escrita<br>- Suspensão<br>- Reeducação<br>- Rebaixamento de cargo<br>- Demissão.',
-                    'state' => 'main_menu'
+                    'message' => 'Consequências para quem violar o código:<br>- Advertência verbal e escrita<br>- Suspensão<br>- Reeducação<br>- Rebaixamento de cargo<br>- Demissão.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '4':
                 return [
-                    'message' => 'Se você testemunhar uma violação do código, registre os detalhes e entre em contato com um analista em tempo real ou agende um horário no RH.',
-                    'state' => 'main_menu'
+                    'message' => 'Se você testemunhar uma violação do código, registre os detalhes e entre em contato com um analista em tempo real ou agende um horário no RH.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             case '5':
                 return [
-                    'message' => 'Violações do código que afetam a reputação da empresa são tratadas com:<br>- Investigação interna e externa<br>- Recolhimento de evidências<br>- Aplicação de medidas disciplinares<br>- Treinamentos sobre ética e conduta.',
-                    'state' => 'main_menu'
+                    'message' => 'Violações do código que afetam a reputação da empresa são tratadas com:<br>- Investigação interna e externa<br>- Recolhimento de evidências<br>- Aplicação de medidas disciplinares<br>- Treinamentos sobre ética e conduta.<br><br>' . $this->askIfSolved()['message'],
+                    'state' => 'ask_if_solved'
                 ];
             default:
                 return [
