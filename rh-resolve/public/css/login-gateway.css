@@ -285,11 +285,13 @@ input[type="password"]::placeholder {
 
     .login-text {
         height: 60vh;
-        top: -40vh;
+        top: -20vh;
         padding: 4%;
-        width: 100vw;
+        width: 170vw !important;
+        margin-left: -35vw !important;
+        border-radius: 0 0 50% 50%;
     }
-
+    
     .login-text.expand {
         height: 90vh;
         top: 0;
@@ -307,6 +309,13 @@ input[type="password"]::placeholder {
 
     .text input, .text button {
         max-width: 100%;
+    }
+
+    .text a {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
     }
 
     .cta {
@@ -340,6 +349,9 @@ input[type="password"]::placeholder {
         height: 65vh;
         top: -45vh;
         padding: 5%;
+        width: 140vw;
+        margin-left: -20vw;
+        border-radius: 0 0 50% 50%;
     }
 
     .login-text.expand {
@@ -359,6 +371,13 @@ input[type="password"]::placeholder {
 
     .text input, .text button {
         max-width: 80%;
+    }
+
+    .text a {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
     }
 
     .cta {
@@ -396,6 +415,9 @@ input[type="password"]::placeholder {
         height: 75vh;
         top: -50vh;
         padding: 6%;
+        width: 130vw;
+        margin-left: -15vw;
+        border-radius: 0 0 50% 50%;
     }
 
     .login-text.expand {
