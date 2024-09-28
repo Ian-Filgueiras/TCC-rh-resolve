@@ -287,12 +287,19 @@ input[type="password"]::placeholder {
         height: 60vh;
         top: -40vh;
         padding: 4%;
-        width: 100vw;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .login-text.expand {
         height: 90vh;
         top: 0;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .text {
@@ -329,6 +336,8 @@ input[type="password"]::placeholder {
     }
 }
 
+
+
 @media (max-width: 768px) {
     .wrapper {
         height: 100vh;
@@ -340,11 +349,19 @@ input[type="password"]::placeholder {
         height: 65vh;
         top: -45vh;
         padding: 5%;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .login-text.expand {
         height: 90vh;
         top: 0;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .text {
@@ -396,11 +413,19 @@ input[type="password"]::placeholder {
         height: 75vh;
         top: -50vh;
         padding: 6%;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .login-text.expand {
         height: 90vh;
         top: 0;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .text {
