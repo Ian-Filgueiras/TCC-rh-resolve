@@ -2,18 +2,26 @@ var cta = document.querySelector(".cta");
 var check = 0;
 
 cta.addEventListener('click', function(e){
-    var text = e.target.nextElementSibling;
-    var loginText = e.target.parentElement;
-    text.classList.toggle('show-hide');
-    loginText.classList.toggle('expand');
-    if(check == 0)
-    {
+    var text = document.querySelector('.login-text .text');
+    var loginText = document.querySelector('.login-text');
+
+    if (text) {
+        text.classList.toggle('show-hide');
+    } else {
+        console.error("Elemento text não encontrado.");
+    }
+
+    if (loginText) {
+        loginText.classList.toggle('expand');
+    } else {
+        console.error("Elemento loginText não encontrado.");
+    }
+
+    if(check == 0) {
         cta.innerHTML = "<i class=\"fas fa-chevron-up\"></i>";
         check++;
-    }
-    else
-    {
+    } else {
         cta.innerHTML = "<i class=\"fas fa-chevron-down\"></i>";
         check = 0;
     }
-})
+});
