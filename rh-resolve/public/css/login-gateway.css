@@ -285,7 +285,7 @@ input[type="password"]::placeholder {
 
     .login-text {
         height: 60vh;
-        top: -40vh;
+        top: -20vh;
         padding: 4%;
         width: 150vw;
         left: -25vw;
@@ -314,6 +314,13 @@ input[type="password"]::placeholder {
 
     .text input, .text button {
         max-width: 100%;
+    }
+
+    .text a {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
     }
 
     .cta {
@@ -376,6 +383,13 @@ input[type="password"]::placeholder {
 
     .text input, .text button {
         max-width: 80%;
+    }
+
+    .text a {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
     }
 
     .cta {
