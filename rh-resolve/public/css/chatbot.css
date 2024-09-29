@@ -284,10 +284,6 @@ body {
     #send-button img {
         width: 24px;
     }
-
-    h1.chatbox-title {
-        display: none;
-    }
 }
 
 /* Tablets */
@@ -328,9 +324,5 @@ body {
 
     #send-button img {
         width: 28px;
-    }
-
-    h1.chatbox-title {
-        display: none;
     }
 }
