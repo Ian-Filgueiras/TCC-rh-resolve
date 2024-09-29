@@ -1,6 +1,6 @@
 .roboto-regular {
     font-family: "Roboto", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
 }
 
@@ -73,7 +73,6 @@ body {
     margin: 20px auto;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     position: relative;
 
 }
@@ -285,6 +284,10 @@ body {
     #send-button img {
         width: 24px;
     }
+
+    h1.chatbox-title {
+        display: none;
+    }
 }
 
 /* Tablets */
@@ -325,5 +328,9 @@ body {
 
     #send-button img {
         width: 28px;
+    }
+
+    h1.chatbox-title {
+        display: none;
     }
 }
