@@ -80,39 +80,28 @@ class ChatbotController extends Controller
     private function handleMainMenu($message)
     {
         switch ($message) {
-            case '1': // Início com informações padrões automáticas
-                return [
-                    'message' => 'Aqui estão as informações automáticas padrão...',
-                    'state' => 'main_menu'
-                ];
-            case '2': // Perguntas pré-definidas para funcionários
-                return [
-                    'message' => 'Selecione um tópico:
-                    <br>1. Holerite
-                    <br>2. Benefícios
-                    <br>3. Descontos
-                    <br>4. Horas Extras
-                    <br>5. Férias
-                    <br>6. Atestados Médicos
-                    <br>7. Direitos e Deveres do Funcionário
-                    <br>8. Código de Conduta e Ética
-                    <br>9. Finalizar',
-                    'state' => 'pre_defined_questions'
-                ];
-            case '3': // Falar com atendente
-                return [
-                    'message' => 'Entrando em contato com o atendente. Por favor, aguarde...',
-                    'state' => 'contacting_attendant'
-                ];
-            case '4': // Agendamento de horário presencial
-                return [
-                    'message' => 'Para agendar um horário presencial, por favor, informe a data desejada ou acesse o calendário disponível no portal.',
-                    'state' => 'scheduling'
-                ];
+            case '1': // Holerite
+                return $this->getHoleriteQuestions();
+            case '2': // Benefícios
+                return $this->getBenefitsQuestions();
+            case '3': // Descontos
+                return $this->getDiscountsQuestions();
+            case '4': // Horas Extras
+                return $this->getOvertimeQuestions();
+            case '5': // Férias
+                return $this->getVacationQuestions();
+            case '6': // Atestados Médicos
+                return $this->getMedicalCertificateQuestions();
+            case '7': // Direitos e Deveres do Funcionário
+                return $this->getEmployeeRightsAndDutiesQuestions();
+            case '8': // Código de Conduta e Ética
+                return $this->getEthicsCodeQuestions();
+            case '9': // Finalizar atendimento
+                return $this->endConversation();
             default:
                 return [
                     'message' => 'Opção inválida. Por favor, selecione uma opção válida.',
-                    'state' => 'main_menu'
+                    'state' => 'pre_defined_questions'
                 ];
         }
     }
@@ -284,8 +273,17 @@ class ChatbotController extends Controller
     private function showMainMenu()
     {
         return [
-            'message' => 'Selecione um tópico:<br>1. Início com informações padrões automáticas<br>2. Perguntas pré-definidas para funcionários de empresas cadastradas<br>3. Falar com atendente<br>4. Agendamento de horário presencial com o RH',
-            'state' => 'main_menu'
+            'message' => 'Selecione um tópico:
+            <br>1. Holerite
+            <br>2. Benefícios
+            <br>3. Descontos
+            <br>4. Horas Extras
+            <br>5. Férias
+            <br>6. Atestados Médicos
+            <br>7. Direitos e Deveres do Funcionário
+            <br>8. Código de Conduta e Ética
+            <br>9. Finalizar',
+            'state' => 'pre_defined_questions'
         ];
     }
 
@@ -311,7 +309,7 @@ class ChatbotController extends Controller
                 return $this->getEthicsCodeAnswer($message);
             case 'absence_days':
                 return $this->handleAbsenceDays($message);
-            case 'aso_check': 
+            case 'aso_check':
                 return $this->transferToAnalyst($message);
             default:
                 return [

@@ -13,5 +13,5 @@ Route::get('/login', function () {
 
 
 
-Route::get('/chatbot', [ChatbotController::class, 'index']);
+Route::get('/chatbot', [ChatbotController::class, 'index'])->name('chatbot');;
 Route::post('/chatbot', [ChatbotController::class, 'handle']);

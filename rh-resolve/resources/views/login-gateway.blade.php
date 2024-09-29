@@ -31,7 +31,7 @@
   </div>
   <div class="call-text">
     <h1><span>RH Resolve+</span> Praticidade e clareza no seu suporte, como essa tela.</h1>
-    <button class="btn btn-success">Vamos Começar!</button>
+    <button class="btn btn-success"><a href="{{ route('chatbot') }}">Vamos Começar!</a></button>
   </div>
 </div>
 

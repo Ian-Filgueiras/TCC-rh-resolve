@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    appendMessage('Bot', '1. Início com informações padrões automáticas<br>2. Perguntas pré-definidas para funcionários de empresas cadastradas<br>3. Falar com atendente (consultor do RH Resolve +)<br>4. Agendamento de horário presencial com o RH da empresa');
+    appendMessage('Bot', 'Olá! Como posso ajudar você hoje? <br>1. Holerite <br>2. Benefícios <br>3. Descontos <br>4. Horas Extras<br>5. Férias<br>6. Atestados Médicos<br>7. Direitos e Deveres do Funcionário<br>8. Código de Conduta e Ética <br>9. Finalizar');
 
     // Adiciona o evento de clique ao botão de envio
     const sendButton = document.getElementById('send-button');
