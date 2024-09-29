@@ -1,3 +1,9 @@
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
 body {
     font-family: 'Raleway', sans-serif;
     background-color: #ffffff;
@@ -126,6 +132,7 @@ input[type="password"]::placeholder {
     color: #fff;
     border: none;
     cursor: pointer;
+    outline: none
   }
 
   .text .button:hover::before {
@@ -156,6 +163,15 @@ input[type="password"]::placeholder {
     );
     transition: all 0.475s;
   }
+
+  .text .button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(150, 93, 233, 0.5);
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
 
 .cta {
     width: 60px;
@@ -287,14 +303,19 @@ input[type="password"]::placeholder {
         height: 60vh;
         top: -20vh;
         padding: 4%;
-        width: 170vw !important;
-        margin-left: -35vw !important;
-        border-radius: 0 0 50% 50%;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
-    
+
     .login-text.expand {
         height: 90vh;
         top: 0;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .text {
@@ -338,6 +359,8 @@ input[type="password"]::placeholder {
     }
 }
 
+
+
 @media (max-width: 768px) {
     .wrapper {
         height: 100vh;
@@ -349,14 +372,19 @@ input[type="password"]::placeholder {
         height: 65vh;
         top: -45vh;
         padding: 5%;
-        width: 140vw;
-        margin-left: -20vw;
-        border-radius: 0 0 50% 50%;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .login-text.expand {
         height: 90vh;
         top: 0;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .text {
@@ -415,14 +443,19 @@ input[type="password"]::placeholder {
         height: 75vh;
         top: -50vh;
         padding: 6%;
-        width: 130vw;
-        margin-left: -15vw;
-        border-radius: 0 0 50% 50%;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .login-text.expand {
         height: 90vh;
         top: 0;
+        width: 150vw;
+        left: -25vw;
+        border-bottom-left-radius: 75vw;
+        border-bottom-right-radius: 75vw;
     }
 
     .text {

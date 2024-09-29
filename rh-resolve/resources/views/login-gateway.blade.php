@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div class="wrapper">
+<div class="wrapper roboto-regular">
   <div class="login-text">
     <button class="cta"><i class="fas fa-chevron-down fa-1x"></i></button>
     <div class="text">

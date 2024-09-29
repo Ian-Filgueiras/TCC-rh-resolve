@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    
+
     appendMessage('Bot', '1. Início com informações padrões automáticas<br>2. Perguntas pré-definidas para funcionários de empresas cadastradas<br>3. Falar com atendente (consultor do RH Resolve +)<br>4. Agendamento de horário presencial com o RH da empresa');
 
     // Adiciona o evento de clique ao botão de envio
@@ -62,10 +62,10 @@ function appendMessage(sender, message) {
     messageElement.classList.add('message');
 
     if (sender === 'Bot') {
-        messageElement.classList.add('message-bot');
+        messageElement.classList.add('message-bot', 'roboto-regular');
         messageContainer.classList.add('left');
     } else if (sender === 'Você') {
-        messageElement.classList.add('message-usuario');
+        messageElement.classList.add('message-usuario', 'roboto-regular');
         messageContainer.classList.add('right');
     }
 
@@ -74,3 +74,4 @@ function appendMessage(sender, message) {
     messagesContainer.appendChild(messageContainer);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
+
