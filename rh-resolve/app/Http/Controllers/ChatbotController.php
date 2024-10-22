@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
+
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class ChatbotController extends Controller
@@ -67,7 +71,8 @@ class ChatbotController extends Controller
             case 'ask_for_rating': // Recebe a avaliação de 1 a 10
                 return $this->endConversationWithRating($message); // Finaliza o atendimento com a avaliação
 
-
+            case'collect_feedback':
+                return $this->collectFeedback($message);
 
             default:
                 return [
@@ -265,8 +270,22 @@ class ChatbotController extends Controller
     private function endConversationWithRating($rating)
     {
         return [
-            'message' => 'Obrigado pela sua avaliação de ' . $rating . '/10. Atendimento finalizado.',
-            'state' => 'main_menu'
+            'message' => 'Obrigado pela sua avaliação de ' . $rating . '/10. <br>Por favor, deixe um feedback sobre o atendimento:',
+            'state' => 'collect_feedback'
+        ];
+    }
+
+    private function collectFeedback($feedbackText)
+    {
+        
+        $feedback = new Feedback();
+        $feedback->user_id = Auth::id();
+        $feedback->texto = $feedbackText; 
+        $feedback->save(); 
+
+        return [
+            'message' => 'Obrigado pelo seu feedback! Atendimento finalizado.',
+            'state' => 'main_menu' 
         ];
     }
 
