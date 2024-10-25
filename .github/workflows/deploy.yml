@@ -20,11 +20,11 @@ jobs:
     
     - name: Test SSH Connection
       run: |
-        ssh -o StrictHostKeyChecking=no -t root@145.223.73.36 'echo "SSH connection successful!"'
+        ssh -o StrictHostKeyChecking=no -t user@145.223.73.36 'echo "SSH connection successful!"'
         
     - name: Deploy via SSH
       run: |
-        ssh -tt root@145.223.73.36 << 'EOF'
+        ssh -tt user@145.223.73.36 << 'EOF'
         cd /home/user/htdocs/srv625742.hstgr.cloud
         git pull origin main
         composer install --no-interaction --prefer-dist --optimize-autoloader
