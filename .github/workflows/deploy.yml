@@ -20,7 +20,7 @@ jobs:
 
     - name: Deploy via SSH
       run: |
-        ssh root@145.223.73.36 << 'EOF'
+        ssh -t root@145.223.73.36 << 'EOF'
         cd /home/user/htdocs/srv625742.hstgr.cloud
         git pull origin main
         composer install --no-interaction --prefer-dist --optimize-autoloader
